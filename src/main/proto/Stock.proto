@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package me.fwfurtado.grpc.stock;
+
+message StockItem {
+    string code =  1;
+    int64 quantity = 2;
+}
+
+message StockQuery {
+    string code = 1;
+}
+
+message MultiStockQuery {
+    repeated string code = 1;
+}
+
+service StockService {
+    rpc searchBy(StockQuery) returns (StockItem);
+    rpc searchAllBy(MultiStockQuery) returns (stream StockItem);
+}
